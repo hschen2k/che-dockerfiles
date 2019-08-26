@@ -2,14 +2,14 @@ FROM ubuntu:18.04
 
 RUN apt-get update \
     && apt-get install -y curl \
-    curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
-    apt-get update && apt-get install -y --no-install-recommends \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+    && apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     gcc \
     libc6-dev \
     make \
     nodejs \
-    && sudo rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 ENV GOLANG_VERSION 1.12.9
 ENV GOLANG_LS_VERSION="0.1.7"
 ENV goRelArch linux-amd64
