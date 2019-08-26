@@ -1,6 +1,6 @@
 FROM ubuntu
-RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo bash - && \
-    sudo apt-get update && sudo apt-get install -y --no-install-recommends \
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
+    apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     gcc \
     libc6-dev \
@@ -13,11 +13,11 @@ ENV goRelArch linux-amd64
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go${GOLANG_VERSION}.${goRelArch}.tar.gz
 ENV GOPATH /projects/.che
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
-RUN sudo curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
-    && sudo tar -C /usr/local -xzf golang.tar.gz \
-    && sudo rm golang.tar.gz && \
-    sudo mkdir -p /projects/.che && \
-    sudo chmod -R 777 /projects && \
+RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
+    && tar -C /usr/local -xzf golang.tar.gz \
+    && rm golang.tar.gz && \
+    mkdir -p /projects/.che && \
+    chmod -R 777 /projects && \
     export GOPATH=/tmp/gopath && \
     go get -v github.com/nsf/gocode && \
     go get -v github.com/uudashr/gopkgs/cmd/gopkgs && \
@@ -41,13 +41,13 @@ RUN sudo curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
     go get -v github.com/sourcegraph/go-langserver && \
     go get -v github.com/derekparker/delve/cmd/dlv && \
     mkdir -p ${HOME}/che/ls-golang && \
-    echo "unset SUDO\nif sudo -n true > /dev/null 2>&1; then\nexport SUDO="sudo"\nfi\n if [ ! -d "/projects/.che/src" ]; then\necho "Copying GO LS Deps"\n\${SUDO} mkdir -p /projects/.che\n \${SUDO} cp -R /tmp/gopath/* /projects/.che/\nfi" > ${HOME}/gopath.sh && \
+    echo "unset SUDO\nif -n true > /dev/null 2>&1; then\nexport SUDO=""\nfi\n if [ ! -d "/projects/.che/src" ]; then\necho "Copying GO LS Deps"\n\${SUDO} mkdir -p /projects/.che\n \${SUDO} cp -R /tmp/gopath/* /projects/.che/\nfi" > ${HOME}/gopath.sh && \
     chmod +x ${HOME}/gopath.sh && \
     cd ${HOME}/che/ls-golang && \
     npm i go-language-server@${GOLANG_LS_VERSION} && \
     for f in "${HOME}/che" "${HOME}/.cache"; do \
-        sudo chgrp -R 0 ${f} && \
-        sudo chmod -R g+rwX ${f}; \
+        chgrp -R 0 ${f} && \
+        chmod -R g+rwX ${f}; \
     done
 EXPOSE 8080
 CMD ${HOME}/gopath.sh & tail -f /dev/null
