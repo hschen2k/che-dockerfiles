@@ -1,4 +1,4 @@
-FROM eclipse/stack-base:ubuntu
+FROM ubuntu
 RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo bash - && \
     sudo apt-get update && sudo apt-get install -y --no-install-recommends \
     g++ \
