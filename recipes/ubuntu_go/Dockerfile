@@ -1,5 +1,5 @@
 FROM eclipse/stack-base:ubuntu
-RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo bash - && \
     sudo apt-get update && sudo apt-get install -y --no-install-recommends \
     g++ \
     gcc \
@@ -7,7 +7,7 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo bash - && \
     make \
     nodejs \
     && sudo rm -rf /var/lib/apt/lists/*
-ENV GOLANG_VERSION 1.10.2
+ENV GOLANG_VERSION 1.12.9
 ENV GOLANG_LS_VERSION="0.1.7"
 ENV goRelArch linux-amd64
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go${GOLANG_VERSION}.${goRelArch}.tar.gz
