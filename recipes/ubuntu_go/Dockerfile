@@ -9,6 +9,7 @@ RUN apt-get update \
     libc6-dev \
     make \
     nodejs \
+    git \
     && rm -rf /var/lib/apt/lists/*
 ENV GOLANG_VERSION 1.12.9
 ENV GOLANG_LS_VERSION="0.1.7"
