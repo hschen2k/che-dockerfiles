@@ -11,7 +11,7 @@ RUN apt-get update \
     nodejs \
     git \
     && rm -rf /var/lib/apt/lists/*
-ENV GOLANG_VERSION 1.12.9
+ENV GOLANG_VERSION 1.13
 ENV GOLANG_LS_VERSION="0.1.7"
 ENV goRelArch linux-amd64
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go${GOLANG_VERSION}.${goRelArch}.tar.gz
